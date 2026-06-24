@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %}Item List{% endblock %} {% block
+body_class %}retro-page{% endblock %} {% block content %}
+<div class="container-fluid retro-bg py-5">
+  <div class="container">
+    <h1 class="mb-5 text-center display-3 text-light">{{ item['title'] }}</h1>
+
+    <div class="row align-items-center">
+      <!-- Image on the left -->
+      <div class="col-md-5 text-center">
+        <img
+          src="{{ item['images'] }}"
+          class="img-fluid retro-img"
+          alt="{{ item['title'] }}"
+        />
+      </div>
+
+      <!-- Text on the right -->
+      <div class="col-md-7 text-light">
+        <h2 class="mb-4">{{ item['title'] }}</h2>
+        <p class="lead">{{ item['description'] }}</p>
+
+        <hr class="retro-divider" />
+
+        <p><strong>Price:</strong> ${{ item['price'] }}</p>
+        <p><strong>Type:</strong> {{ item['item_type'] }}</p>
+        <p><strong>Size:</strong> {{ item['size'] }}</p>
+        <p><strong>Colour:</strong> {{ item['colour'] }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,305 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="term-for-english">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="manifest"
+      href="{{ url_for('static', filename='manifest.json') }}"
+    />
+    <title>{% block title %}Item List{% endblock %}</title>
+
+    <style>
+      /* Layout: make body a column flex container so footer sits at bottom */
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        background: linear-gradient(to right, #000000, #141414);
+        background-size: 400% 400%;
+        animation: surfGradient 15s ease infinite;
+        font-family: "Pacifico", cursive, sans-serif;
+      }
+
+      /* main grows to fill available space so footer is pushed to bottom */
+      main {
+        flex: 1 0 auto;
+      }
+
+      @keyframes surfGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      h1 {
+        color: rgb(223, 46, 46);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 50px;
+      }
+
+      .card {
+        width: 70%;
+      }
+
+      /* Optional: ensure footer sits above any absolutely positioned content */
+      footer {
+        margin-top: 100px;
+        z-index: 10;
+      }
+
+      main.container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    </style>
+
+    {% block page_styles %}{% endblock %}
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid px-0">
+        <a class="navbar-brand" href="/">Linc's-Forge.Co</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="http://127.0.0.1:5000/"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('add_item') }}">Add Item</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >Dropdown</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/?item_type=Surfboard"
+                    >Surfboards</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/?item_type=T-Shirt"
+                    >T-Shirts</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/?item_type=Shorts">Shorts</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/?item_type=Accessory"
+                    >Accessories</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search" action="/" method="GETS">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              name="title"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main content area grows to push footer down -->
+    <main class="container-fluid">{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+      <!-- Section: Social media -->
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+      >
+        <div class="me-5 d-none d-lg-block">
+          <span>Get connected with Linc's Surf.Co:</span>
+        </div>
+
+        <div>
+          <a href="" class="me-4 text-reset">
+            <i class="Linc's Forge.Co-facebook-f"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="Linc's Forge.Co-twitter"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="Linc's Forge.Co-google"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="Linc's Forge.Co-instagram"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="Linc's Forge.Co-linkedin"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="Linc's Forge.Co-github"></i>
+          </a>
+        </div>
+      </section>
+
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">
+                <i class="fas fa-gem me-3"></i>Linc's Surf.Co
+              </h6>
+              <p>
+                Linc's Surf.Co is all about chasing waves and living
+                free—crafted gear that blends style, durability, and coastal
+                soul for surfers who live with passion both in and out of the
+                water.
+              </p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+              <p>
+                <a href="/?item_type=Surfboard" class="text-reset">Surfboard</a>
+              </p>
+              <p>
+                <a href="/?item_type=T-Shirt" class="text-reset">T-Shirts</a>
+              </p>
+              <p>
+                <a href="/?item_type=Shorts" class="text-reset">Board-Shorts</a>
+              </p>
+              <p>
+                <a href="/?item_type=Accessory" class="text-reset"
+                  >Accessories</a
+                >
+              </p>
+            </div>
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+              <p>
+                <a
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  class="text-reset"
+                  >Pricing</a
+                >
+              </p>
+              <p>
+                <a
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  class="text-reset"
+                  >Settings</a
+                >
+              </p>
+              <p>
+                <a
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  class="text-reset"
+                  >Orders</a
+                >
+              </p>
+              <p>
+                <a
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  class="text-reset"
+                  >Help</a
+                >
+              </p>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+              <p>
+                <i class="fas fa-home me-3"></i> Byron Bay, BB 2481, Australia
+              </p>
+              <p><i class="fas fa-envelope me-3"></i> Linc@prosurfer.com.au</p>
+              <p><i class="fas fa-phone me-3"></i> + 04 234 567 55</p>
+              <p><i class="fas fa-print me-3"></i> + 04 567 234 93</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        © 2021 Copyright:
+        <a
+          class="text-reset fw-bold"
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          >Linc's Surf.Co</a
+        >
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("{{ url_for('static', filename='service-worker.js') }}")
+
+            .then((reg) => console.log("Service worker registered.", reg))
+
+            .catch((err) =>
+              console.log("Service worker registration failed:", err)
+            );
+        });
+      }
+    </script>
+  </body>
+</html>
