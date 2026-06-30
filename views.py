@@ -37,6 +37,23 @@ def init_routes(app):
 
         return render_template('gallery.html', items=items)
 
+    @app.route('/custom')
+    def custom():
+        title = request.args.get("title", "")
+        item_type = request.args.get("item_type", "")
+
+        query = Item.query
+
+        # Apply filters if present
+        if title:
+            query = query.filter(Item.title.ilike(f"%{title}%"))
+        if item_type:
+            query = query.filter(Item.item_type == item_type)
+
+        items = query.all()
+
+        return render_template('custom.html', items=items)
+
 
     @app.route('/add', methods=['GET', 'POST'])
     def add_item():

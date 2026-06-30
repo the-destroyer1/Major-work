@@ -1,5 +1,5 @@
 <!-- templates/base.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="term-for-english">
   <head>
     <meta charset="UTF-8" />
@@ -109,6 +109,11 @@
               <a class="nav-link" href="{{ url_for('gallery') }}">Gallery</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('custom') }}"
+                >Custom Order!!</a
+              >
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ url_for('add_item') }}">Add Item</a>
             </li>
             <li class="nav-item dropdown">
@@ -201,9 +206,7 @@
               <h6 class="text-uppercase fw-bold mb-4">
                 <i class="fas fa-gem me-3"></i>Linc's Surf.Co
               </h6>
-              <p>
-                Linc's Forge.Co is all about....
-              </p>
+              <p>Linc's Forge.Co is all about....</p>
             </div>
 
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -261,7 +264,10 @@
               <p>
                 <i class="fas fa-home me-3"></i> Byron Bay, BB 2481, Australia
               </p>
-              <p><i class="fas fa-envelope me-3"></i> linc.cassar@education.nsw.gov.au</p>
+              <p>
+                <i class="fas fa-envelope me-3"></i>
+                linc.cassar@education.nsw.gov.au
+              </p>
               <p><i class="fas fa-phone me-3"></i> + 04 234 567 55</p>
               <p><i class="fas fa-print me-3"></i> + 04 567 234 93</p>
             </div>
@@ -274,11 +280,7 @@
         style="background-color: rgba(0, 0, 0, 0.05)"
       >
         © 2026 Copyright:
-        <a
-          class="text-reset fw-bold"
-          href=""
-          >Linc's Forge.Co</a
-        >
+        <a class="text-reset fw-bold" href="">Linc's Forge.Co</a>
       </div>
     </footer>
 
@@ -296,7 +298,7 @@
             .then((reg) => console.log("Service worker registered.", reg))
 
             .catch((err) =>
-              console.log("Service worker registration failed:", err)
+              console.log("Service worker registration failed:", err),
             );
         });
       }
