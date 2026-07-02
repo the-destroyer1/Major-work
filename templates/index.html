@@ -27,23 +27,23 @@ content %}
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img
-        src="https://copilot.microsoft.com/th/id/BCO.79c1c257-0ab8-44be-97b4-600477c58701.png"
+        src="{{ url_for('static', filename='images/Forge2.png') }}"
         class="d-block w-100"
-        alt="..."
+        alt="Forge2"
       />
     </div>
     <div class="carousel-item">
       <img
-        src="https://copilot.microsoft.com/th/id/BCO.ba01c57d-c50d-407d-be34-767ec3343d7c.png"
+        src="{{ url_for('static', filename='images/Forge2.png') }}"
         class="d-block w-100"
-        alt="..."
+        alt="Forge2"
       />
     </div>
     <div class="carousel-item">
       <img
-        src="https://copilot.microsoft.com/th/id/BCO.82da1659-48f7-4dc9-bb11-1c57e4763bb1.png"
+        src="{{ url_for('static', filename='images/Blade1,1.png') }}"
         class="d-block w-100"
-        alt="..."
+        alt="Forge2"
       />
     </div>
   </div>
@@ -95,7 +95,9 @@ content %}
         <button
           type="submit"
           class="btn btn-danger"
-          onclick="return confirm('Are you sure you want to delete this item?');"
+          onclick="
+            return confirm('Are you sure you want to delete this item?');
+          "
         >
           Delete
         </button>
