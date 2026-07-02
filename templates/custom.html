@@ -1,8 +1,302 @@
-<!-- templates/index.html -->
-{% extends "base.html" %} {% block title %}Item List{% endblock %} {% block
-content %}
+{% extends "base.html" %} {% block title %}Customise Your Blade{% endblock %} {%
+block content %}
 <h1>Customise Your Blade</h1>
 
+<form id="customiser" method="post" action="{{ url_for('create_order') }}">
+  <fieldset>
+    <legend><strong>Blade Type</strong></legend>
+    <label>
+      <input type="radio" name="blade_type" value="chef" checked />
+      Chef's Blade
+    </label>
+    <label>
+      <input type="radio" name="blade_type" value="dagger" />
+      Dagger
+    </label>
+    <label>
+      <input type="radio" name="blade_type" value="sword" />
+      Sword
+    </label>
+    <label>
+      <input type="radio" name="blade_type" value="cleaver" />
+      Cleaver
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Handle Material</strong></legend>
+    <select
+      name="handle_material"
+      id="handle_material"
+      aria-label="Handle material"
+    >
+      <option value="purple_heart">Purple Heart</option>
+      <option value="gidgee">Gidgee</option>
+      <option value="teak">Teak</option>
+    </select>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Options</strong></legend>
+    <label for="length">Blade length (cm)</label>
+    <input
+      type="number"
+      id="length"
+      name="length"
+      min="10"
+      max="120"
+      value="30"
+    />
+
+    <label for="finish">Finish</label>
+    <select id="finish" name="finish">
+      <option value="polished">Polished</option>
+      <option value="brushed">Brushed</option>
+      <option value="patina">Patina</option>
+    </select>
+  </fieldset>
+
+  <!-- Only visible for swords & daggers -->
+  <div id="guard_pommel_section" style="display: none; margin-top: 1rem">
+    <label for="guard_type"><strong>Guard Type</strong></label>
+    <select id="guard_type" name="guard_type">
+      <option value="steel">Steel</option>
+      <option value="brass">Brass</option>
+      <option value="copper">Copper</option>
+    </select>
+
+    <label for="pommel_type" style="margin-top: 0.6rem"
+      ><strong>Pommel Type</strong></label
+    >
+    <select id="pommel_type" name="pommel_type">
+      <option value="steel">Steel</option>
+      <option value="brass">Brass</option>
+      <option value="copper">Copper</option>
+    </select>
+  </div>
+
+  <div id="preview" aria-live="polite">
+    <h2>Preview</h2>
+    <img
+      id="preview_img"
+      src="{{ url_for('static', filename='images/chef_purple_heart.png') }}"
+      alt="Blade preview"
+      width="420"
+    />
+    <p>
+      <strong>Estimated price:</strong> <span id="price_display">$0.00</span>
+    </p>
+  </div>
+
+  <button type="submit">Order</button>
+</form>
+
+<script>
+  const bladeRadios = document.querySelectorAll('input[name="blade_type"]');
+  const handleSelect = document.getElementById("handle_material");
+  const lengthInput = document.getElementById("length");
+  const finishSelect = document.getElementById("finish");
+  const previewImg = document.getElementById("preview_img");
+  const priceDisplay = document.getElementById("price_display");
+
+  const guardPommelSection = document.getElementById("guard_pommel_section");
+
+  const basePrices = {
+    chef: 120,
+    dagger: 80,
+    sword: 250,
+    cleaver: 100,
+  };
+  const handlePrices = {
+    purple_heart: 40,
+    gidgee: 55,
+    teak: 30,
+  };
+  const finishPrices = {
+    polished: 0,
+    brushed: 10,
+    patina: 20,
+  };
+
+  function updateLengthLimits(blade) {
+    if (blade === "sword") {
+      lengthInput.min = 60;
+      lengthInput.max = 150;
+      if (lengthInput.value < 60) lengthInput.value = 60;
+      if (lengthInput.value > 150) lengthInput.value = 150;
+    } else {
+      lengthInput.min = 10;
+      lengthInput.max = 35;
+      if (lengthInput.value < 10) lengthInput.value = 10;
+      if (lengthInput.value > 35) lengthInput.value = 35;
+    }
+  }
+
+  function updateGuardPommelVisibility(blade) {
+    if (blade === "sword" || blade === "dagger") {
+      guardPommelSection.style.display = "block";
+    } else {
+      guardPommelSection.style.display = "none";
+    }
+  }
+
+  function updatePreview() {
+    const blade = document.querySelector(
+      'input[name="blade_type"]:checked',
+    ).value;
+    const handle = handleSelect.value;
+    const finish = finishSelect.value;
+
+    updateLengthLimits(blade);
+    updateGuardPommelVisibility(blade);
+
+    const length = Number(lengthInput.value) || Number(lengthInput.min);
+
+    const imgName = `${blade}_${handle}.png`;
+    previewImg.src = `/static/images/${imgName}`;
+
+    const lengthFactor = 1 + Math.max(0, length - 30) * 0.01;
+    const price =
+      (basePrices[blade] + handlePrices[handle] + finishPrices[finish]) *
+      lengthFactor;
+
+    priceDisplay.textContent = `$${price.toFixed(2)}`;
+  }
+
+  bladeRadios.forEach((r) => r.addEventListener("change", updatePreview));
+  handleSelect.addEventListener("change", updatePreview);
+  lengthInput.addEventListener("input", updatePreview);
+  finishSelect.addEventListener("change", updatePreview);
+
+  updatePreview();
+</script>
+
 {% endblock %} {% block page_styles %}
-<style></style>
+<style>
+  /* Overall page */
+  body {
+    background: #111;
+    color: #eee;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #eee;
+    text-decoration: underline;
+    padding-top: 20px;
+  }
+
+  /* Layout */
+  form {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  fieldset {
+    border: 1px solid #333;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    background: #1a1a1a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1rem;
+  }
+
+  legend {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0 0.4rem;
+  }
+
+  label {
+    display: block;
+    margin: 0.4rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    margin-right: 0.4rem;
+    transform: scale(1.2);
+  }
+
+  select,
+  input[type="number"] {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #222;
+    color: #eee;
+    font-size: 1rem;
+  }
+
+  /* Preview panel */
+  #preview {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  #preview h2 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  #preview img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    background: #000;
+    padding: 0.5rem;
+  }
+
+  #price_display {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4caf50;
+  }
+
+  /* Button */
+  button {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    color: #fff;
+    padding: 0.9rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-top: 1rem;
+  }
+
+  button:hover {
+    background: linear-gradient(135deg, #66bb6a, #388e3c);
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    transform: translateY(0);
+  }
+
+  /* Mobile layout */
+  @media (max-width: 900px) {
+    form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 {% endblock %}

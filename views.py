@@ -109,3 +109,18 @@ def init_routes(app):
         flash('Item deleted successfully!', 'success')
         return redirect(url_for('index'))
 
+    @app.route('/create_order', methods=['POST'])
+    def create_order():
+        blade = request.form.get('blade_type', 'chef')
+        handle = request.form.get('handle_material', 'purple_heart')
+        length = float(request.form.get('length', 30))
+        finish = request.form.get('finish', 'polished')
+
+        base_prices = {'chef':120,'dagger':80,'sword':250,'cleaver':100}
+        handle_prices = {'purple_heart':40,'gidgee':55,'teak':30}
+        finish_prices = {'polished':0,'brushed':10,'patina':20}
+
+        length_factor = 1 + max(0, (length - 30)) * 0.01
+        price = (base_prices[blade] + handle_prices[handle] + finish_prices[finish]) * length_factor
+
+        return f"Order received: {blade} with {handle}, length {length}cm. Price ${price:.2f}"
