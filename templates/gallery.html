@@ -1,77 +1,24 @@
 <!-- templates/index.html -->
 {% extends "base.html" %} {% block title %}Item List{% endblock %} {% block
 content %}
-<div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators">
-    <button
-      type="button"
-      data-bs-target="#carouselExampleIndicators"
-      data-bs-slide-to="0"
-      class="active"
-      aria-current="true"
-      aria-label="Slide 1"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleIndicators"
-      data-bs-slide-to="1"
-      aria-label="Slide 2"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleIndicators"
-      data-bs-slide-to="2"
-      aria-label="Slide 3"
-    ></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
       <img
-        src="https://copilot.microsoft.com/th/id/BCO.79c1c257-0ab8-44be-97b4-600477c58701.png"
-        class="d-block w-100"
-        alt="..."
+        src="{{ url_for('static', filename='images/Blade1,1.png') }}"
+        class="gal"
+        alt="Blade1"
       />
-    </div>
-    <div class="carousel-item">
       <img
-        src="https://copilot.microsoft.com/th/id/BCO.ba01c57d-c50d-407d-be34-767ec3343d7c.png"
-        class="d-block w-100"
-        alt="..."
+        src="{{ url_for('static', filename='images/Blade1,1.png') }}"
+        class="gal"
+        alt="Blade1"
       />
-    </div>
-    <div class="carousel-item">
-      <img
-        src="https://copilot.microsoft.com/th/id/BCO.82da1659-48f7-4dc9-bb11-1c57e4763bb1.png"
-        class="d-block w-100"
-        alt="..."
-      />
-    </div>
-  </div>
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#carouselExampleIndicators"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#carouselExampleIndicators"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-
 
 </div>
 {% endblock %} {% block page_styles %}
 <style>
- 
+  .gal {
+    border-image: auto;
+    width: 300px;
+    height: auto;
+  }
 </style>
 {% endblock %}
