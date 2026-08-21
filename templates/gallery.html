@@ -1,84 +1,264 @@
-<!-- templates/index.html -->
-{% extends "base.html" %} {% block title %}Item List{% endblock %} {% block
+{% extends "base.html" %} {% block title %}Gallery{% endblock %} {% block
 content %}
-      <img
-        src="{{ url_for('static', filename='images/Forge1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-      <img
-        src="{{ url_for('static', filename='images/Forge3.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-      <img
-        src="{{ url_for('static', filename='images/Ring1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-      <img
-        src="{{ url_for('static', filename='images/Hunter1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-      <img
-        src="{{ url_for('static', filename='images/Cleaver1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-      <img
-        src="{{ url_for('static', filename='images/Blade1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-      <img
-        src="{{ url_for('static', filename='images/Diveb1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-            <img
-        src="{{ url_for('static', filename='images/Diver1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-            <img
-        src="{{ url_for('static', filename='images/Forge4.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-            <img
-        src="{{ url_for('static', filename='images/Chef2.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-            <img
-        src="{{ url_for('static', filename='images/Chef3.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-                  <img
-        src="{{ url_for('static', filename='images/Chef4.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-                  <img
-        src="{{ url_for('static', filename='images/Chef1.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
-                  <img
-        src="{{ url_for('static', filename='images/Chef3.png') }}"
-        class="gal"
-        alt="Blade1"
-      />
+<div class="flow-wrapper">
+  <!-- Larger forge images with glow + float -->
+  <img
+    src="{{ url_for('static', filename='images/Forge1.png') }}"
+    class="forge float-a"
+  />
+  <img
+    src="{{ url_for('static', filename='images/Forge3.png') }}"
+    class="forge float-b"
+  />
 
+  <!-- Ring Project -->
+  <div class="cluster cluster-left">
+    <h2 class="cluster-title">Forged Ring</h2>
+    <p class="cluster-text">
+      Texture studies, heat control, and shaping experiments.
+    </p>
+
+    <img
+      src="{{ url_for('static', filename='images/Ring1.png') }}"
+      class="piece tilt-a offset-left"
+    />
+  </div>
+
+  <img
+    src="{{ url_for('static', filename='images/Forge4.png') }}"
+    class="forge float-c"
+  />
+
+  <!-- Hunter Knife -->
+  <div class="cluster cluster-right">
+    <h2 class="cluster-title">Hunter Knife</h2>
+    <p class="cluster-text">Bevel geometry and ergonomic shaping.</p>
+
+    <img
+      src="{{ url_for('static', filename='images/Hunter1.png') }}"
+      class="piece tilt-b offset-right"
+    />
+  </div>
+
+  <img
+    src="{{ url_for('static', filename='images/Forge1.png') }}"
+    class="forge float-d"
+  />
+
+  <!-- Cleaver -->
+  <div class="cluster cluster-center">
+    <h2 class="cluster-title">Cleaver</h2>
+    <p class="cluster-text">Weight distribution and durability testing.</p>
+
+    <img
+      src="{{ url_for('static', filename='images/Cleaver1.png') }}"
+      class="piece tilt-c offset-mid"
+    />
+  </div>
+
+  <img
+    src="{{ url_for('static', filename='images/Forge3.png') }}"
+    class="forge float-e"
+  />
+
+  <!-- Dive Knife -->
+  <div class="cluster cluster-left">
+    <h2 class="cluster-title">Dive Knife</h2>
+    <p class="cluster-text">Corrosion resistance and underwater reliability.</p>
+
+    <img
+      src="{{ url_for('static', filename='images/Diveb1.png') }}"
+      class="piece tilt-d offset-left"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Diver1.png') }}"
+      class="piece tilt-e offset-right"
+    />
+  </div>
+
+  <img
+    src="{{ url_for('static', filename='images/Forge4.png') }}"
+    class="forge float-f"
+  />
+
+  <!-- Chef Knives -->
+  <div class="cluster cluster-right">
+    <h2 class="cluster-title">Chef Knives</h2>
+    <p class="cluster-text">Edge geometry and handle ergonomics.</p>
+
+    <img
+      src="{{ url_for('static', filename='images/Chef1.png') }}"
+      class="piece tilt-a offset-left"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Chef2.png') }}"
+      class="piece tilt-b offset-right"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Chef3.png') }}"
+      class="piece tilt-c offset-mid"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Chef4.png') }}"
+      class="piece tilt-d offset-left"
+    />
+  </div>
 </div>
 {% endblock %} {% block page_styles %}
 <style>
-  .gal {
-    border-image: auto;
-    width: 300px;
-    height: auto;
+  /* Wrapper: flowing, non-grid layout */
+  .flow-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 80px 40px;
+  }
+
+  /* Clusters: floating groups of images + text */
+  .cluster {
+    width: 48%;
+    margin: 120px 0;
+    position: relative;
+    padding: 25px;
+    border-radius: 12px;
+
+    /* Subtle paper-like shadow */
+    box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.35);
+    background: rgba(20, 20, 20, 0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  .cluster-left {
+    margin-left: 4%;
+  }
+  .cluster-right {
+    margin-left: 48%;
+  }
+  .cluster-center {
+    margin-left: 26%;
+  }
+
+  .cluster-title {
+    font-size: 1.7rem;
+    color: #f0f0f0;
+    margin-bottom: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .cluster-text {
+    font-size: 1rem;
+    color: #c8c8c8;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  /* Project images: slightly smaller + more dramatic tilts */
+  .piece {
+    width: 85%;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+  }
+
+  /* More dramatic skewing */
+  .tilt-a {
+    transform: rotate(-4deg);
+  }
+  .tilt-b {
+    transform: rotate(3deg);
+  }
+  .tilt-c {
+    transform: rotate(-2.5deg);
+  }
+  .tilt-d {
+    transform: rotate(5deg);
+  }
+  .tilt-e {
+    transform: rotate(-3.5deg);
+  }
+
+  /* Hover effect */
+  .piece:hover {
+    transform: scale(1.05) rotate(0deg);
+  }
+
+  /* Horizontal offsets for staggered layout */
+  .offset-left {
+    margin-left: -10%;
+  }
+
+  .offset-right {
+    margin-left: 12%;
+  }
+
+  .offset-mid {
+    margin-left: 4%;
+  }
+
+  /* Optional: slight vertical staggering */
+  .piece:nth-child(2) {
+    margin-top: 10px;
+  }
+  .piece:nth-child(3) {
+    margin-top: -5px;
+  }
+  .piece:nth-child(4) {
+    margin-top: 15px;
+  }
+
+  /* Forge images: larger, glowing, floating */
+  .forge {
+    width: 420px;
+    opacity: 0.85;
+    position: absolute;
+    z-index: -1;
+    border-radius: 12px;
+    filter: drop-shadow(0px 0px 30px rgba(255, 120, 40, 0.35));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .forge:hover {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  /* Floating animation */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-18px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  /* Artistic floating positions */
+  .float-a {
+    top: 20px;
+    left: 5%;
+  }
+  .float-b {
+    top: 350px;
+    left: 68%;
+  }
+  .float-c {
+    top: 780px;
+    left: 18%;
+  }
+  .float-d {
+    top: 1150px;
+    left: 62%;
+  }
+  .float-e {
+    top: 1550px;
+    left: 12%;
+  }
+  .float-f {
+    top: 1950px;
+    left: 72%;
   }
 </style>
 {% endblock %}
