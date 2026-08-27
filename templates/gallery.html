@@ -1,88 +1,39 @@
-@ -1,84 +1,264 @@
 <!-- templates/index.html -->
-{% extends "base.html" %} {% block title %}Item List{% endblock %} {% block {%
-extends "base.html" %} {% block title %}Gallery{% endblock %} {% block content
-%}
-<img
-  src="{{ url_for('static', filename='images/Forge1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Forge3.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Ring1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Hunter1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Cleaver1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Blade1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Diveb1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Diver1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Forge4.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Chef2.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Chef3.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Chef4.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Chef1.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
-<img
-  src="{{ url_for('static', filename='images/Chef3.png') }}"
-  class="gal"
-  alt="Blade1"
-/>
+{% extends "base.html" %} {% block title %}Gallery{% endblock %} {% block
+content%}
+
 <div class="flow-wrapper">
   <!-- Larger forge images with glow + float -->
   <img
     src="{{ url_for('static', filename='images/Forge1.png') }}"
     class="forge float-a"
   />
-  <img
-    src="{{ url_for('static', filename='images/Forge3.png') }}"
-    class="forge float-b"
-  />
+
+  <!-- Sword -->
+  <div class="cluster cluster-left">
+    <h2 class="cluster-title">Bastard Sword</h2>
+    <p class="cluster-text">
+      A bastard sword forged from a peice of leaf spring with a purple heart
+      handle
+    </p>
+
+    <img
+      src="{{ url_for('static', filename='images/Sword3.png') }}"
+      class="piece tilt-a offset-left"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Sword2.png') }}"
+      class="piece tilt-b offset-right"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Sword1.png') }}"
+      class="piece tilt-c offset-mid"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Sword4.png') }}"
+      class="piece tilt-d offset-left"
+    />
+  </div>
 
   <!-- Ring Project -->
   <div class="cluster cluster-left">
@@ -118,6 +69,11 @@ extends "base.html" %} {% block title %}Gallery{% endblock %} {% block content
     class="forge float-d"
   />
 
+  <img
+    src="{{ url_for('static', filename='images/Forge3.png') }}"
+    class="forge float-b"
+  />
+
   <!-- Cleaver -->
   <div class="cluster cluster-center">
     <h2 class="cluster-title">Cleaver</h2>
@@ -127,11 +83,41 @@ extends "base.html" %} {% block title %}Gallery{% endblock %} {% block content
       src="{{ url_for('static', filename='images/Cleaver1.png') }}"
       class="piece tilt-c offset-mid"
     />
+
+    <img
+      src="{{ url_for('static', filename='images/Cleaver2.png') }}"
+      class="piece tilt-c offset-mid"
+    />
   </div>
 
   <img
     src="{{ url_for('static', filename='images/Forge3.png') }}"
     class="forge float-e"
+  />
+
+  <!-- Dagger -->
+  <div class="cluster cluster-right">
+    <h2 class="cluster-title">Dagger</h2>
+    <p class="cluster-text">Bevel geometry and ergonomic shaping.</p>
+
+    <img
+      src="{{ url_for('static', filename='images/Dagger1.png') }}"
+      class="piece tilt-b offset-right"
+    />
+    <img
+      src="{{ url_for('static', filename='images/Dagger2.png') }}"
+      class="piece tilt-b offset-right"
+    />
+  </div>
+
+  <img
+    src="{{ url_for('static', filename='images/Forge1.png') }}"
+    class="forge float-d"
+  />
+
+  <img
+    src="{{ url_for('static', filename='images/Forge3.png') }}"
+    class="forge float-b"
   />
 
   <!-- Dive Knife -->
@@ -173,32 +159,6 @@ extends "base.html" %} {% block title %}Gallery{% endblock %} {% block content
     />
     <img
       src="{{ url_for('static', filename='images/Chef4.png') }}"
-      class="piece tilt-d offset-left"
-    />
-  </div>
-
-  <!-- Sword -->
-  <div class="cluster cluster-left">
-    <h2 class="cluster-title">Bastard Sword</h2>
-    <p class="cluster-text">
-      A bastard sword forged from a peice of leaf spring with a purple heart
-      handle
-    </p>
-
-    <img
-      src="{{ url_for('static', filename='images/Sword1.png') }}"
-      class="piece tilt-a offset-left"
-    />
-    <img
-      src="{{ url_for('static', filename='images/Sword2.png') }}"
-      class="piece tilt-b offset-right"
-    />
-    <img
-      src="{{ url_for('static', filename='images/Sword3.png') }}"
-      class="piece tilt-c offset-mid"
-    />
-    <img
-      src="{{ url_for('static', filename='images/Sword4.png') }}"
       class="piece tilt-d offset-left"
     />
   </div>
