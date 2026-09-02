@@ -4,26 +4,24 @@ block content %}
 <h1>Customise Your Blade</h1>
 
 <form id="customiser" method="post" action="{{ url_for('create_order') }}">
+  <!-- BLADE TYPE -->
   <fieldset>
     <legend><strong>Blade Type</strong></legend>
-    <label>
-      <input type="radio" name="blade_type" value="chef" checked />
-      Chef's Blade
-    </label>
-    <label>
-      <input type="radio" name="blade_type" value="dagger" />
-      Dagger
-    </label>
-    <label>
-      <input type="radio" name="blade_type" value="sword" />
-      Sword
-    </label>
-    <label>
-      <input type="radio" name="blade_type" value="cleaver" />
-      Kitchen Cleaver
-    </label>
+    <label
+      ><input type="radio" name="blade_type" value="chef" checked /> Chef's
+      Blade</label
+    >
+    <label
+      ><input type="radio" name="blade_type" value="dagger" /> Dagger</label
+    >
+    <label><input type="radio" name="blade_type" value="sword" /> Sword</label>
+    <label
+      ><input type="radio" name="blade_type" value="cleaver" /> Kitchen
+      Cleaver</label
+    >
   </fieldset>
 
+  <!-- HANDLE MATERIAL (moved here) -->
   <fieldset>
     <legend><strong>Handle Material</strong></legend>
     <select name="handle_material" id="handle_material">
@@ -33,6 +31,7 @@ block content %}
     </select>
   </fieldset>
 
+  <!-- OPTIONS (moved below handle) -->
   <fieldset>
     <legend><strong>Options</strong></legend>
 
@@ -54,11 +53,12 @@ block content %}
     </select>
   </fieldset>
 
+  <!-- PREVIEW -->
   <div id="preview" aria-live="polite">
     <h2>Preview</h2>
     <img
       id="preview_img"
-      src="{{ url_for('static', filename='images/chef_purple_heart.png') }}"
+      src="{{ url_for('static', filename='images/ChefP.png') }}"
       alt="Blade preview"
       width="420"
     />
@@ -120,8 +120,22 @@ block content %}
 
     const length = Number(lengthInput.value) || Number(lengthInput.min);
 
-    const imgName = `${blade}_${handle}.png`;
-    previewImg.src = `/static/images/${imgName}`;
+    const bladeMap = {
+      chef: "Chef",
+      dagger: "Dagger",
+      sword: "Sword",
+      cleaver: "Cleaver",
+    };
+
+    const handleMap = {
+      purple_heart: "P",
+      gidgee: "G",
+      teak: "T",
+    };
+
+    const imgName = `${bladeMap[blade]}${handleMap[handle]}.png`;
+
+    previewImg.src = "{{ url_for('static', filename='images') }}/" + imgName;
 
     const lengthFactor = 1 + Math.max(0, length - 30) * 0.01;
     const price =
@@ -206,26 +220,74 @@ block content %}
     font-size: 1rem;
   }
 
+  /* --- PREVIEW PANEL --- */
+
   #preview {
-    background: #1a1a1a;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(145deg, #1a1a1a, #111);
+    border-radius: 14px;
+    padding: 1.4rem;
+    box-shadow:
+      0 0 18px rgba(0, 0, 0, 0.7),
+      inset 0 0 12px rgba(255, 255, 255, 0.05);
     text-align: center;
+    border: 1px solid rgba(80, 80, 80, 0.4);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
+
+  #preview:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 22px rgba(0, 0, 0, 0.8),
+      0 0 12px rgba(76, 175, 80, 0.35);
+  }
+
+  /* --- PREVIEW TITLE --- */
+
+  #preview h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    color: #cfcfcf;
+    text-shadow: 0 0 6px rgba(0, 255, 120, 0.25);
+  }
+
+  /* --- IMAGE FRAME --- */
 
   #preview img {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 10px;
     margin-bottom: 1rem;
     background: #000;
-    padding: 0.5rem;
+    padding: 0.6rem;
+    border: 1px solid rgba(100, 100, 100, 0.4);
+    box-shadow:
+      0 0 10px rgba(0, 0, 0, 0.6),
+      inset 0 0 8px rgba(0, 255, 120, 0.15);
+    transition: box-shadow 0.25s ease;
   }
 
+  #preview img:hover {
+    box-shadow:
+      0 0 14px rgba(0, 255, 120, 0.35),
+      inset 0 0 10px rgba(0, 255, 120, 0.25);
+  }
+
+  /* --- PRICE DISPLAY --- */
+
   #price_display {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #4caf50;
+    text-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+    display: inline-block;
+    margin-top: 0.4rem;
+  }
+
+  #preview p {
+    font-size: 1.1rem;
+    color: #ccc;
   }
 
   button {
