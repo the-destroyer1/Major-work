@@ -55,24 +55,18 @@ content %}
       />
     </div>
 
-    <div class="col-12 col-md-4">
-      <input
-        class="form-control surf-input"
-        type="text"
-        name="colour"
-        placeholder="Colour"
-        required
-      />
+    <div class="col-12">
+      <label>Colour</label>
+      <input type="text" name="colour" class="form-control surf-input" />
     </div>
 
     <div class="col-12">
-      <input
-        class="form-control surf-input"
-        type="text"
-        name="image"
-        placeholder="Image URL"
-        required
-      />
+      <label>Select PNG</label>
+      <select class="form-control surf-input" name="image">
+        {% for img in images %}
+        <option value="{{ img }}">{{ img }}</option>
+        {% endfor %}
+      </select>
     </div>
 
     <div class="col-12">
@@ -85,7 +79,6 @@ content %}
 {% endblock %} {% block page_styles %}
 <style>
   /* Retro surf aesthetic */
-
 
   .surf-heading {
     text-align: center;
@@ -124,7 +117,9 @@ content %}
     border-radius: 25px;
     padding: 0.6rem 1.5rem;
     border: none;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition:
+      background 0.3s ease,
+      transform 0.2s ease;
   }
 
   .surf-btn:hover {
