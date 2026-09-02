@@ -72,11 +72,22 @@ content %}
 <div class="card-grid">
   {% for item in items %}
   <div class="card">
-    <img src="{{ item.images }}" class="card-img-top" alt="..." />
+    <img
+      src="{{ url_for('static', filename='images/' + item.images) }}"
+      class="card-img-top"
+      alt="..."
+    />
     <div class="card-body">
       <h5 class="card-title">{{ item.title }}</h5>
       <p class="card-text">{{ item.description }}</p>
       <p class="card-text">${{ item.price }}</p>
+      <form
+        action="{{ url_for('add_to_cart', id=item.id) }}"
+        method="post"
+        style="margin-top: 0.5rem"
+      >
+        <button type="submit">Add to Cart</button>
+      </form>
 
       <!-- Action buttons -->
       <a href="{{ url_for('view_item', id=item.id) }}" class="btn btn-primary"

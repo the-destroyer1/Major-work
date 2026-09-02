@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block title %}Your Cart{% endblock %} {% block
+content %}
+<div class="container py-4">
+  <h1 class="mb-4 text-center">Your Cart</h1>
+
+  {% if items %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Subtotal</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>
+              <strong>{{ item.title }}</strong>
+            </td>
+
+            <td class="text-center">${{ "%.2f"|format(item.price) }}</td>
+
+            <td class="text-center">
+              <form
+                action="{{ url_for('update_quantity', id=item.id) }}"
+                method="post"
+                class="d-inline"
+              >
+                <input
+                  type="number"
+                  name="quantity"
+                  value="{{ item.quantity }}"
+                  min="1"
+                  class="form-control form-control-sm d-inline-block"
+                  style="width: 70px"
+                />
+                <button class="btn btn-sm btn-outline-primary ms-1">
+                  Update
+                </button>
+              </form>
+            </td>
+
+            <td class="text-center">
+              ${{ "%.2f"|format(item.price * item.quantity) }}
+            </td>
+
+            <td class="text-center">
+              <form
+                action="{{ url_for('remove_from_cart', id=item.id) }}"
+                method="post"
+                class="d-inline"
+              >
+                <button class="btn btn-sm btn-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <hr />
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">
+          Total:
+          <span class="text-success"> ${{ "%.2f"|format(total) }} </span>
+        </h4>
+
+        <a href="{{ url_for('checkout') }}" class="btn btn-lg btn-success">
+          <i class="bi bi-credit-card"></i> Checkout
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+  <p class="text-center mt-4">Your cart is empty.</p>
+  {% endif %}
+</div>
+{% endblock %}

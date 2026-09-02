@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Order Successful{% endblock %} {%
+block content %}
+<div class="container py-5 text-center">
+  <div class="card shadow-lg p-5" style="max-width: 650px; margin: auto">
+    <h1 class="mb-4 text-success">
+      <i class="bi bi-check-circle-fill"></i>
+      Thank You!
+    </h1>
+
+    <p class="lead mb-4">
+      Your order has been successfully placed. We’re forging your custom blade
+      with care and precision.
+    </p>
+
+    <hr class="my-4" />
+
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+      <i class="bi bi-shop"></i> Continue Shopping
+    </a>
+  </div>
+</div>
+{% endblock %}

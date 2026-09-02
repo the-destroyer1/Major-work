@@ -65,11 +65,6 @@ content%}
   </div>
 
   <img
-    src="{{ url_for('static', filename='images/Forge1.png') }}"
-    class="forge float-d"
-  />
-
-  <img
     src="{{ url_for('static', filename='images/Forge3.png') }}"
     class="forge float-b"
   />
@@ -89,11 +84,6 @@ content%}
       class="piece tilt-c offset-mid"
     />
   </div>
-
-  <img
-    src="{{ url_for('static', filename='images/Forge3.png') }}"
-    class="forge float-e"
-  />
 
   <!-- Dagger -->
   <div class="cluster cluster-right">
@@ -136,8 +126,23 @@ content%}
   </div>
 
   <img
-    src="{{ url_for('static', filename='images/Forge4.png') }}"
+    src="{{ url_for('static', filename='images/Forge5.png') }}"
     class="forge float-f"
+  />
+
+  <img
+    src="{{ url_for('static', filename='images/Forge6.png') }}"
+    class="forge float-g"
+  />
+
+  <img
+    src="{{ url_for('static', filename='images/Forge7.png') }}"
+    class="forge float-h"
+  />
+
+  <img
+    src="{{ url_for('static', filename='images/Forge8.png') }}"
+    class="forge float-i"
   />
 
   <!-- Chef Knives -->
@@ -300,30 +305,40 @@ content%}
     }
   }
 
-  /* Artistic floating positions */
+  /* Artistic floating positions — increased spacing */
   .float-a {
     top: 20px;
     left: 5%;
   }
+
   .float-b {
-    top: 350px;
-    left: 68%;
+    top: 600px;
+    left: 60%;
   }
+
   .float-c {
-    top: 780px;
-    left: 18%;
+    top: 2000px; /* moved down */
+    left: 60%;
   }
-  .float-d {
-    top: 1150px;
-    left: 62%;
-  }
-  .float-e {
-    top: 1550px;
-    left: 12%;
-  }
+
   .float-f {
-    top: 1950px;
+    top: 2650px; /* moved down */
     left: 72%;
+  }
+
+  .float-g {
+    top: 6500px; /* moved down */
+    left: 10%;
+  }
+
+  .float-h {
+    top: 9000px; /* moved down */
+    left: 55%;
+  }
+
+  .float-i {
+    top: 10600px; /* moved down */
+    left: 10%;
   }
 </style>
 {% endblock %}

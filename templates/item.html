@@ -8,7 +8,7 @@ body_class %}retro-page{% endblock %} {% block content %}
       <!-- Image on the left -->
       <div class="col-md-5 text-center">
         <img
-          src="{{ item['images'] }}"
+          src="{{ url_for('static', filename='images/' + item.images) }}"
           class="img-fluid retro-img"
           alt="{{ item['title'] }}"
         />

@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block title %}Customise Your Blade{% endblock %} {%
 block content %}
+
 <h1>Customise Your Blade</h1>
 
 <form id="customiser" method="post" action="{{ url_for('create_order') }}">
@@ -25,11 +26,7 @@ block content %}
 
   <fieldset>
     <legend><strong>Handle Material</strong></legend>
-    <select
-      name="handle_material"
-      id="handle_material"
-      aria-label="Handle material"
-    >
+    <select name="handle_material" id="handle_material">
       <option value="purple_heart">Purple Heart</option>
       <option value="gidgee">Gidgee</option>
       <option value="teak">Teak</option>
@@ -38,6 +35,7 @@ block content %}
 
   <fieldset>
     <legend><strong>Options</strong></legend>
+
     <label for="length">Blade length (cm)</label>
     <input
       type="number"
@@ -55,25 +53,6 @@ block content %}
       <option value="patina">Patina</option>
     </select>
   </fieldset>
-
-  <!-- Only visible for swords & daggers -->
-  <div id="guard_pommel_section" style="display: none; margin-top: 1rem">
-    <label for="guard_type"><strong>Guard Type</strong></label>
-    <select id="guard_type" name="guard_type">
-      <option value="steel">Steel</option>
-      <option value="brass">Brass</option>
-      <option value="copper">Copper</option>
-    </select>
-
-    <label for="pommel_type" style="margin-top: 0.6rem"
-      ><strong>Pommel Type</strong></label
-    >
-    <select id="pommel_type" name="pommel_type">
-      <option value="steel">Steel</option>
-      <option value="brass">Brass</option>
-      <option value="copper">Copper</option>
-    </select>
-  </div>
 
   <div id="preview" aria-live="polite">
     <h2>Preview</h2>
@@ -98,8 +77,6 @@ block content %}
   const finishSelect = document.getElementById("finish");
   const previewImg = document.getElementById("preview_img");
   const priceDisplay = document.getElementById("price_display");
-
-  const guardPommelSection = document.getElementById("guard_pommel_section");
 
   const basePrices = {
     chef: 120,
@@ -132,14 +109,6 @@ block content %}
     }
   }
 
-  function updateGuardPommelVisibility(blade) {
-    if (blade === "sword" || blade === "dagger") {
-      guardPommelSection.style.display = "block";
-    } else {
-      guardPommelSection.style.display = "none";
-    }
-  }
-
   function updatePreview() {
     const blade = document.querySelector(
       'input[name="blade_type"]:checked',
@@ -148,7 +117,6 @@ block content %}
     const finish = finishSelect.value;
 
     updateLengthLimits(blade);
-    updateGuardPommelVisibility(blade);
 
     const length = Number(lengthInput.value) || Number(lengthInput.min);
 
@@ -173,7 +141,6 @@ block content %}
 
 {% endblock %} {% block page_styles %}
 <style>
-  /* Overall page */
   body {
     background: #111;
     color: #eee;
@@ -191,7 +158,6 @@ block content %}
     padding-top: 20px;
   }
 
-  /* Layout */
   form {
     max-width: 1100px;
     margin: 0 auto;
@@ -240,19 +206,12 @@ block content %}
     font-size: 1rem;
   }
 
-  /* Preview panel */
   #preview {
     background: #1a1a1a;
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
     text-align: center;
-  }
-
-  #preview h2 {
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-    font-weight: 600;
   }
 
   #preview img {
@@ -269,7 +228,6 @@ block content %}
     color: #4caf50;
   }
 
-  /* Button */
   button {
     grid-column: 1 / -1;
     background: linear-gradient(135deg, #4caf50, #2e7d32);
@@ -288,11 +246,6 @@ block content %}
     transform: translateY(-2px);
   }
 
-  button:active {
-    transform: translateY(0);
-  }
-
-  /* Mobile layout */
   @media (max-width: 900px) {
     form {
       grid-template-columns: 1fr;

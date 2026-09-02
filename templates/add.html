@@ -56,13 +56,17 @@ content %}
     </div>
 
     <div class="col-12">
-      <input
-        class="form-control surf-input"
-        type="text"
-        name="image"
-        placeholder="Image URL"
-        required
-      />
+      <label>Colour</label>
+      <input type="text" name="colour" class="form-control surf-input" />
+    </div>
+
+    <div class="col-12">
+      <label>Select PNG</label>
+      <select class="form-control surf-input" name="image">
+        {% for img in images %}
+        <option value="{{ img }}">{{ img }}</option>
+        {% endfor %}
+      </select>
     </div>
 
     <div class="col-12">
