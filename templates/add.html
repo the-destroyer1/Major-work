@@ -55,16 +55,6 @@ content %}
       />
     </div>
 
-    <div class="col-12 col-md-4">
-      <input
-        class="form-control surf-input"
-        type="text"
-        name="colour"
-        placeholder="Colour"
-        required
-      />
-    </div>
-
     <div class="col-12">
       <input
         class="form-control surf-input"
@@ -85,7 +75,6 @@ content %}
 {% endblock %} {% block page_styles %}
 <style>
   /* Retro surf aesthetic */
-
 
   .surf-heading {
     text-align: center;
@@ -124,7 +113,9 @@ content %}
     border-radius: 25px;
     padding: 0.6rem 1.5rem;
     border: none;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition:
+      background 0.3s ease,
+      transform 0.2s ease;
   }
 
   .surf-btn:hover {
